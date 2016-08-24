@@ -51,3 +51,30 @@ def list_quizz_files():
         print e
 
 
+def take_quiz(quiz_name):
+    with open('json/' + quiz_name + '.json') as quiz_file:
+        data = json.load(quiz_file)
+        answers = []
+        for q, det in data.iteritems():
+            init_screen()
+            correct_ans = det['answer'].lower()
+            ans = nonBlockingRawInput(det['choices'], det['question'])
+            if ans == "Invalid Choice":
+                return ans
+            if ans.lower().strip() not in ['a', 'b', 'c', 'd']:
+                answers.append("0")
+            else:
+                if correct_ans == ans.lower().strip():
+                    answers.append(ans.lower().strip())
+                else:
+                    answers.append("x")
+            
+            correct = 0
+            total = len(answers)
+            for x in answers:
+                if x not in ['0','x']:
+                    correct += 1
+            results = [["Total questions", total],["Correct Answers", correct]]
+            print("\n")
+            print(tabulate(results, tablefmt = "fancy_grid"))
+
