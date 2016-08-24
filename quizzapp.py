@@ -1,13 +1,15 @@
-from termcolor import colored
-import click
+from termcolor import colored, cprint
+from pyfiglet import figlet_format
+import quizzactions
+from timer import AlarmException, alarmHandler, nonBlockingRawInput
+import click, os
 import cmd
-from quizzactions import Actions
+import easygui
 
 
 class Quizz(cmd.Cmd):
 
-    action = Actions()
-    intro = action.init_screen()
+    intro = quizzactions.init_screen()
     prompt = "quiz@quizzapp>>>"
 
     def do_quiz_list(self, arg):
@@ -15,7 +17,7 @@ class Quizz(cmd.Cmd):
         List the names of quizzes
         quiz_list
         """
-        pass
+        quizzactions.list_quizz_files()
 
     def do_remote_quizes(self, arg):
     	"""
@@ -43,14 +45,20 @@ class Quizz(cmd.Cmd):
 		Import a new quiz from a json file
 		quiz_import <quiz name>
     	"""
-    	pass
+    	# pass
+        path = easygui.fileopenbox()
+        print(path)
 
     def do_quiz_take(self, quiz):
     	"""
 		Take the specified quiz
 		quiz_take <quiz name>
     	"""
-    	pass
+        try:
+    	   answers = quizzactions.take_quiz(quiz)
+        except:
+            print colored("The command requires <quiz name> argument", "green")
+    	
 
     def default(self, args):
     	"""
@@ -58,12 +66,11 @@ class Quizz(cmd.Cmd):
     	"""
     	print colored("Invalid Command", "red")
 
-    def do_EOF(self, line):
-        return True
-
 
 if __name__ == "__main__":
-	try:
-		Quizz().cmdloop()
-	except:
-		pass
+    try:
+        Quizz().cmdloop()
+    except KeyboardInterrupt:
+        os.system("clear")
+        cprint(figlet_format('Logged Out QuizzApp', font='digital'),
+               'red', attrs=['bold', 'blink'])
