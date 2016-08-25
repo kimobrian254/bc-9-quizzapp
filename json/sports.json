@@ -1,0 +1,113 @@
+{
+	"q1":{
+		"question":"Which Premiership football club plays its home games at White Hart Lane?",
+		"choices":{
+			"A":"Arsenal",
+			"B":"Chelsea",
+			"C":"Tottenham Hotspur",
+			"D":"West Ham United"
+		},
+		"answer":"C",
+		"time":5
+	},
+	"q2":{
+		"question":"Who was England's chief coach at the 2006 FIFA World Cup ?",
+		"choices":{
+			"A":"Arsene Wenger",
+			"B":"Glen Hoddle",
+			"C":"kevin Keegan",
+			"D":"Sven Goran Hogson"
+		},
+		"answer":"D",
+		"time":5
+	},
+	"q3":{
+		"question":"Which English footballer scored a great goal against Argentina in the 1998 World Cup?",
+		"choices":{
+			"A":"Glenn Hoddle",
+			"B":"Ian Wright",
+			"C":"Les Ferdinand",
+			"D":"Michael Owen"
+
+		},
+		"answer":"D",
+		"time":5
+	},
+	"q4":{
+		"question":"What are Bristol's two football clubs called?",
+		"choices":{
+			"A":"Athletic and City",
+			"B":"City and Rovers",
+			"C":"Rovers and United",
+			"D":"United and Wanderers"
+		},
+		"answer":"B",
+		"time":5
+	},
+	"q5":{
+		"question":"What colour are the home shirts of Everton Football Club?",
+		"choices":{
+			"A":"Blue",
+			"B":"Green and White Hoops",
+			"C":"Red",
+			"D":"Yellow and Black"
+		},
+		"answer":"A",
+		"time":5
+	},
+	"q6":{
+		"question":"Which country did footballer Kenny Dalglish represent?",
+		"choices":{
+			"A":"Ireland",
+			"B":"Scotland",
+			"C":"wales",
+			"D":"English"
+		},
+		"answer":"B",
+		"time":5
+	},
+	"q7":{
+		"question":"Which country won its fifth football World Cup in 2002?",
+		"choices":{
+			"A":"Brazil",
+			"B":"Germany",
+			"C":"Italy",
+			"D":"Uruguay"
+		},
+		"answer":"A",
+		"time":5
+	},
+	"q8":{
+		"question":"Which of these football clubs is not based in Lancashire?",
+		"choices":{
+			"A":"Barnsley",
+			"B":"Blackburn Rovers",
+			"C":"Him",
+			"D":"Her"
+		},
+		"answer":"A",
+		"time":5
+	},
+	"q9":{
+		"question":"'The Wizard Of Dribble', which Stanley was a famous England footballer?",
+		"choices":{
+			"A":"Baldwin",
+			"B":"Halloway",
+			"C":"Laurel",
+			"D":"Mathews"
+		},
+		"answer":"D",
+		"time":5
+	},
+	"q10":{
+		"question":"Which footballer was known as 'Gazza'?",
+		"choices":{
+			"A":"Garry Lineker",
+			"B":"Gary Mabutt",
+			"C":"Gary Speed",
+			"D":"Paul Gasgoine"
+		},
+		"answer":"D",
+		"time":5
+	}
+}

@@ -1,9 +1,13 @@
 from termcolor import colored, cprint
 from pyfiglet import figlet_format
 import quizzactions
-import click, os
+import os
+import sys
 import cmd
 import easygui
+import warnings
+
+warnings.filterwarnings("ignore")
 
 
 class Quizz(cmd.Cmd):
@@ -16,49 +20,60 @@ class Quizz(cmd.Cmd):
         List the names of quizzes
         quiz_list
         """
-        quizzactions.list_quizz_files()
+        pass
 
     def do_show_remote_quizzes(self, arg):
         """
-        List quizes in the remote server
-        remote_quizes
+                List quizes in the remote server
+                remote_quizes
+        """
+        pass
+
+    def do_easy_import(self, arg):
+        """
+        Easier way to select files
+        """
+        pass
+
+    def do_elogout(self, arg):
+        """
+        Exit from quizzapp console application
         """
         pass
 
     def do_download_quiz(self, quiz_name):
         """
-        Downloads specified quiz from remote server
-        download_quiz <quiz name>
+                Downloads specified quiz from remote server
+                download_quiz <quiz name>
         """
         pass
 
     def do_upload_quiz(self, quiz_name):
         """
-        Uploads apecified quiz to remote server
-        upload_quiz <quiz name>
+                Uploads apecified quiz to remote server
+                upload_quiz <quiz name>
         """
         pass
 
     def do_quiz_import(self, quiz_path):
         """
-        Import a new quiz from a json file
-        quiz_import <quiz name>
+                Import a new quiz from a json file
+                quiz_import <quiz name>
         """
-        pass
+        quizzactions.import_quiz(quiz_path)
 
     def do_quiz_take(self, quiz):
         """
-        Take the specified quiz
-        quiz_take <quiz name>
+                Take the specified quiz
+                quiz_take <quiz name>
         """
         pass
-        
 
     def default(self, args):
         """
         Handles invalid commands
         """
-        print colored("Invalid Command", "red")
+        print colored("Invalid Command or Command Format", "red")
 
 
 if __name__ == "__main__":
