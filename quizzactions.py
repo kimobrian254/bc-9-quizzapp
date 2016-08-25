@@ -1,14 +1,17 @@
 from termcolor import cprint, colored
 from pyfiglet import figlet_format
-from os.path import basename, splitext
+from os.path import splitext
 from tabulate import tabulate
-from timer import nonBlockingRawInput, AlarmException, alarmHandler
-import sys
+from firebase import firebase
+from jsonschema import validate
+from timer import AlarmException, alarmHandler, nonBlockingRawInput
+from shutil import copy2
 import os
 import click
-import time
 import json
-from colorama import init
+import easygui
+
+firebase = firebase.FirebaseApplication('https://python-ac720.firebaseio.com', None)
 
 
 def init_screen():
@@ -57,10 +60,8 @@ def take_quiz(quiz_name):
         answers = []
         for q, det in data.iteritems():
             init_screen()
-            correct_ans = det['answer'].lower()
-            ans = nonBlockingRawInput(det['choices'], det['question'])
-            if ans == "Invalid Choice":
-                return ans
+            correct_ans = det['ans'].lower()
+            ans = nonBlockingRawInput(det['choices'], det['question'], det['time'])
             if ans.lower().strip() not in ['a', 'b', 'c', 'd']:
                 answers.append("0")
             else:
@@ -78,3 +79,66 @@ def take_quiz(quiz_name):
             print("\n")
             print(tabulate(results, tablefmt = "fancy_grid"))
 
+
+
+def download_quiz(quiz_name):
+    result = firebase.get('/'+ quiz_name, None)
+    try:
+        with open('json/'+ quiz_name +'.json', 'w') as outfile:
+            json.dump(result, outfile)
+    except:
+        print("Error Occurred Importing Quiz")
+
+def list_remote_quizzes():
+    result = firebase.get('/', None)
+    for question in result.keys():
+        print(question)
+
+schema = {
+    "type" : "object",
+    "properties": {
+        "question" : { "type" : "string"},
+        "choices" : {  "type" : "object",
+                        "properties": {
+                            "A" : {"type" : "string"},
+                            "B" : {"type" : "string"},
+                            "C" : {"type" : "string"},
+                            "D" : {"type" : "string"}
+                        }
+                    },
+        "ans" : { "type" : "string" },
+        "time" : { "type" : "number" }
+    },
+    "additionalProperties" : False,
+    "required" : ['question', "choices", "ans", "time"]
+}
+
+def validate_json(instance, schema):
+    try:
+        validate(instance, schema)
+        return "Valid JSON Format"
+    except Exception, e:
+        return "Invalid JSON Format"
+
+def import_quiz(quiz_path):
+    if not os.path.isfile(quiz_path):
+        print colored("File {0} Not found".format(quiz_path), "red")
+        return "Invalid Path"
+    if not quiz_path.endswith(".json"):
+        print colored("The File {0} is not a JSON file".format(quiz_path), "red")
+        return "Not A JSON File"
+    with open(quiz_path) as quiz_file:
+        try:
+            data = json.load(quiz_file)
+            for key, val in data.items():
+                validation = validate_json(val, schema)
+                if validation == "Invalid JSON Format":
+                    return validation
+            copy2(quiz_path, "json")
+            print colored("Quizz File {0} Imported".format(quiz_path), "green")  
+        except ValueError, e:
+            return "Invalid JSON"
+
+
+
+    
