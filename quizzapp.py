@@ -16,11 +16,11 @@ class Quizz(cmd.Cmd):
         List the names of quizzes
         quiz_list
         """
-        pass
+        quizzactions.list_quizz_files()
 
-    def do_remote_quizes(self, arg):
+    def do_show_remote_quizzes(self, arg):
         """
-        List quizes in the remore server
+        List quizes in the remote server
         remote_quizes
         """
         pass

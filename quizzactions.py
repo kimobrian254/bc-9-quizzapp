@@ -21,7 +21,7 @@ def init_screen():
 
     print("Use the following Commands\n")
     commands = [
-        ["remote_quizes", "", "List quizes on remore server"],
+        ["show_remote_quizzes", "", "List quizes on remore server"],
         ["quiz_list", "", "list of quizes on local library"],
         ["quiz_import", "<path to quizz file>", "Import quiz from file"],
         ["quiz_take", "<quiz name>", "Take a quiz"], ["download_quiz",
@@ -55,6 +55,10 @@ def list_quizz_files():
 
 
 def take_quiz(quiz_name):
+    """
+    Command that allows user to take quiz
+    """
+    
     with open('json/' + quiz_name + '.json') as quiz_file:
         data = json.load(quiz_file)
         answers = []
@@ -88,11 +92,6 @@ def download_quiz(quiz_name):
             json.dump(result, outfile)
     except:
         print("Error Occurred Importing Quiz")
-
-def list_remote_quizzes():
-    result = firebase.get('/', None)
-    for question in result.keys():
-        print(question)
 
 schema = {
     "type" : "object",
@@ -139,6 +138,13 @@ def import_quiz(quiz_path):
         except ValueError, e:
             return "Invalid JSON"
 
+
+def list_remote_quizzes():
+    data = firebase.get("/", None)
+    click.echo(click.style('List of Online Questions', fg='green', underline="=", bold=True))
+    for key, val in data.iteritems():
+        click.echo(click.style("\t\t"+key, fg="green"))
+    click.echo(click.style("Download the querries to access them", fg="red"))
 
 
     
