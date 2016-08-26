@@ -13,4 +13,4 @@ The Quizzapp application has the following benefitting features
 * Every question is timed and the next question autmatically appears on time out
 * The application choses random questions making is less unpredictable and more fun
 * With the use of the JSON files, validation of the JSON files and the structure of the content ensures only well structured questions are imported.
-
+* ```easy_import``` command easiens path identification by allowing user to select path
