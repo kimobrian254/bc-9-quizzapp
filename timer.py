@@ -1,10 +1,14 @@
-import signal, sys
+import signal
+import sys
+
 
 class AlarmException(Exception):
     pass
 
+
 def alarmHandler(signum, frame):
     raise AlarmException
+
 
 def nonBlockingRawInput(choices, prompt='', timeout=5):
     signal.signal(signal.SIGALRM, alarmHandler)
@@ -12,7 +16,7 @@ def nonBlockingRawInput(choices, prompt='', timeout=5):
     try:
         print(prompt)
         for choice, ans in choices.iteritems():
-            print(choice+" : "+ans)
+            print(choice + " : " + ans)
         text = raw_input("Answer: ")
         signal.alarm(0)
         return text

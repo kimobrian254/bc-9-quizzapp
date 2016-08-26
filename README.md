@@ -17,10 +17,11 @@ The Quizzapp application has the following benefitting features
 
 ## Installation and Use
 *	Create a virtual Environment on your local machine with ```virtualenv env```
-*	Switch into the virtual environment with ``` cd env```
+*	Switch into the virtual environment with ``` cd env``` and activate with ```. bin/activate```
 * Clone the repo with ```git clone https://github.com/Kimokoti/bc-9-quizzapp```
 *	Switch into the project directory with ```cd bc-9-quizzapp```
 * Install the requirement packages with ```pip install -r requirements.txt```
 * Run the project with ```python quizzapp.py```
 
 The project presents a console with instructions on how to use it.
+
