@@ -9,14 +9,7 @@ class TestQuizzApp(unittest.TestCase):
 	"""
 	Testing functionality of different quizzapp functions
 	"""
-	def test_quiz_listing(self):
-		"""
-		Test case if there are quizzes available
-		Passes if there are quizz files
-		"""
-		self.assertEqual(quizzactions.list_quizz_files(), True, msg="No quiz files")
-
-
+	
 	def test_take_quiz(self):
 		"""
 		Test case if return type is 'list'
@@ -108,7 +101,23 @@ class TestQuizzApp(unittest.TestCase):
 		self.assertEqual(quizzactions.validate_json(wrong_data, schema), "Invalid JSON Format", msg="Invalid JSON format")
 
 	def test_import_quiz(self):
+		"""
+		Test for importing a file that does not exist
+		"""
 		self.assertEqual(quizzactions.import_quiz("json.txt"),"Invalid Path", "The file Exists")
+
+	def test_import_quiz2(self):
+		"""
+		Test for importing a file that is not *.json
+		"""
+		self.assertEqual(quizzactions.import_quiz("invalid.txt"),"Not A JSON File", "The file is a JSON File")
+
+	def test_import_quiz3(self):
+		"""
+		Test for importing a file that is *.json but wrong format
+		"""
+		self.assertEqual(quizzactions.import_quiz("invalid.json"),"Invalid JSON Format", "The file is a valid Quizz File")
+
 
 if __name__ == "__main__":
 	unittest.main()
