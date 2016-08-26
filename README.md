@@ -14,3 +14,13 @@ The Quizzapp application has the following benefitting features
 * The application choses random questions making is less unpredictable and more fun
 * With the use of the JSON files, validation of the JSON files and the structure of the content ensures only well structured questions are imported.
 * ```easy_import``` command easiens path identification by allowing user to select path
+
+## Installation and Use
+*	Create a virtual Environment on your local machine with ```virtualenv env```
+*	Switch into the virtual environment with ``` cd env```
+* Clone the repo with ```git clone https://github.com/Kimokoti/bc-9-quizzapp```
+*	Switch into the project directory with ```cd bc-9-quizzapp```
+* Install the requirement packages with ```pip install -r requirements.txt```
+* Run the project with ```python quizzapp.py```
+
+The project presents a console with instructions on how to use it.
