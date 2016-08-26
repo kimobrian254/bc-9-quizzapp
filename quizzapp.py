@@ -20,40 +20,62 @@ class Quizz(cmd.Cmd):
         List the names of quizzes
         quiz_list
         """
-        pass
+        if arg:
+            print colored("This command does not take arguments", "red")
+        else:
+            quizzactions.list_quizz_files()
 
     def do_show_remote_quizzes(self, arg):
         """
                 List quizes in the remote server
                 remote_quizes
         """
-        pass
+        if arg:
+            print colored("This command does not take arguments", "red")
+        else:
+            quizzactions.list_remote_quizzes()
 
     def do_easy_import(self, arg):
         """
         Easier way to select files
         """
-        pass
+        if arg:
+            print colored("This command does not take arguments", "red")
+        else:
+            file_path = easygui.fileopenbox()
+            if file_path:
+                quizzactions.import_quiz(file_path)
 
-    def do_elogout(self, arg):
+    def do_logout(self, arg):
         """
         Exit from quizzapp console application
         """
-        pass
+        if arg:
+            print colored("This command does not take arguments", "red")
+        else:
+            cprint(figlet_format('Logging Out QuizzApp', font='ogre'),
+                   'red', attrs=['bold', 'blink'])
+            sys.exit()
 
     def do_download_quiz(self, quiz_name):
         """
                 Downloads specified quiz from remote server
                 download_quiz <quiz name>
         """
-        pass
+        if not quiz_name:
+            print colored("The Command Requires a Single Argument", "yellow")
+        else:
+            quizzactions.download_quiz(quiz_name)
 
     def do_upload_quiz(self, quiz_name):
         """
                 Uploads apecified quiz to remote server
                 upload_quiz <quiz name>
         """
-        pass
+        if not quiz_name:
+            print colored("Commmand ", "red")
+        else:
+            quizzactions.upload_quiz(quiz_name)
 
     def do_quiz_import(self, quiz_path):
         """
@@ -67,7 +89,16 @@ class Quizz(cmd.Cmd):
                 Take the specified quiz
                 quiz_take <quiz name>
         """
-        pass
+        if not quiz:
+            print colored("The command requires <quiz name> argument", "yellow")
+            return
+        try:
+            answers = quizzactions.take_quiz(quiz)
+        except ValueError:
+            print colored("The sample is larger than the poulation", "yellow")
+        except Exception, e:
+            print(e)
+            print colored("\t\tNot Enough Questions in the Quizz", "yellow")
 
     def default(self, args):
         """
