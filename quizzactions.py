@@ -65,11 +65,14 @@ def list_quizz_files():
     if os.listdir("json/") != []:
         for file in os.listdir("json/"):
             if file.endswith(".json"):
-                file_object = open("json/" + file)
-                print colored("\t\t* "+splitext(file)[0], "white")
-                return True
+                with open('json/' + file) as quiz_file:
+                    try:
+                        data = json.load(quiz_file)
+                        print colored("\t\t* "+splitext(file)[0], "white")
+                    except ValueError, e:
+                        continue
             else:
-                return "No json"
+                continue
     else:
         print("No Quizzes")
         return "No Quizz Files"
@@ -115,7 +118,7 @@ def take_quiz(quiz_name):
             answers.append("i") #Invalid Choice
         else:
             answers.append('timeout')
-    print colored("Time Out", "red")
+    print colored("\n\t\t****Time Out***", "red")
     result =[]
     timed_out = len([x for x in answers if x == "timeout"])
     wrong =len([x for x in answers if x == "x"])
@@ -190,7 +193,8 @@ def import_quiz(quiz_path):
             copy2(quiz_path, "json")
             print colored("Quizz File {0} Imported".format(quiz_path), "green")  
         except ValueError, e:
-            raise ValueError
+            print colored("Invalid JSON Format", "red")
+            return "Invalid JSON Format"
 
 
 def list_remote_quizzes():
@@ -208,7 +212,10 @@ def upload_quiz(quiz_name):
             except ValueError:
                 print("Invalid JSON data")
             x = firebase.post('/math', data)
+            print colored("Quiz upload Successful", "green")
+            return True
     except IOError, e:
         print colored("Error Opening File", "red")
+        return False
 
     
