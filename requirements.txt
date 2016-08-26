@@ -1,0 +1,13 @@
+argparse==1.2.1
+click==6.6
+colorama==0.3.7
+easygui==0.98.0
+functools32==3.2.3-2
+jsonschema==2.5.1
+pyfiglet==0.7.5
+pyglet==1.2.4
+requests==2.11.1
+tabulate==0.7.5
+termcolor==1.1.0
+tqdm==4.8.4
+wsgiref==0.1.2
