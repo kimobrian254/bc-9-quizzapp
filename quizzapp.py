@@ -73,7 +73,7 @@ class Quizz(cmd.Cmd):
                 upload_quiz <quiz name>
         """
         if not quiz_name:
-            print colored("Commmand ", "red")
+            print colored("Invalid Commmand ", "red")
         else:
             quizzactions.upload_quiz(quiz_name)
 
